@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from patient.views import patients, add_patient, patient_detail, opd, dogovor2str
+from patient.views import patients, add_patient, patient_detail, opd, dogovor2str, ids_opd, el_boln
 
 app_name = 'patient'
 
@@ -28,5 +28,7 @@ urlpatterns = [
     path('patient_detail/<int:pk>/', patient_detail, name='patient_detail'),
     path('opd/<int:pk>/', opd, name='opd'),
     path('dogovor2str/<int:pk>/', dogovor2str, name='dogovor2str'),
+    path('ids_opd/<int:pk>/', ids_opd, name='ids_opd'),
+    path('soglasie_na_boln/<int:pk>/', el_boln, name='el_boln'),
 
 ]

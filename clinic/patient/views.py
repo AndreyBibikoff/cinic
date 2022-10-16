@@ -10,6 +10,29 @@ from datetime import datetime
 def dogovor2str(request, pk):
     title = 'Гастроцентр "Здоровье" - Согласие на обработку персоональных данных'
     patient = get_object_or_404(Patient, pk=pk)
+    months = {1: 'Января', 2: 'Февраля', 3: 'Марта', 4: 'Апреля', 5: 'Мая', 6: 'Июня', 7: 'Июля', 8: 'Августа',
+              9: 'Сентября', 10: 'Октября', 11: 'Ноября', 12: 'Декабря'}
+    dt = datetime.now()
+    day = dt.day
+    year = dt.year
+    m = dt.month
+    ru_month = months[m]
+
+    context = {
+        'title': title,
+        'patient': patient,
+        'day': day,
+        'ru_month': ru_month,
+        'year': year,
+
+    }
+
+    return render(request, 'patient/dogovor2str.html', context)
+
+
+def ids_opd(request, pk):
+    title = 'Гастроцентр "Здоровье" - ИДС+ОПД'
+    patient = get_object_or_404(Patient, pk=pk)
     dt = datetime.now()
     day = dt.day
     year = dt.year
@@ -22,7 +45,20 @@ def dogovor2str(request, pk):
 
     }
 
-    return render(request, 'patient/dogovor2str.html', context)
+    return render(request, 'patient/ids_opd.html', context)
+
+
+def el_boln(request, pk):
+    title = 'Гастроцентр "Здоровье" - Согласие на электронный больничный'
+    patient = get_object_or_404(Patient, pk=pk)
+
+    context = {
+        'title': title,
+        'patient': patient,
+
+    }
+
+    return render(request, 'patient/soglasie_na_boln.html', context)
 
 
 def opd(request, pk):
