@@ -31,4 +31,5 @@ urlpatterns = [
     path('ids_opd/<int:pk>/', ids_opd, name='ids_opd'),
     path('soglasie_na_boln/<int:pk>/', el_boln, name='el_boln'),
 
+
 ]
