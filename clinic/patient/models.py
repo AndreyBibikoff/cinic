@@ -2,6 +2,13 @@ from django.db import models
 
 
 class Patient(models.Model):
+    Yes = 'Y'
+    No = 'N'
+    Card_CHOICES = (
+        (Yes, 'Заведена'),
+        (No, 'Не заведена'),
+    )
+    medical_card = models.CharField(verbose_name='Медицинская карта', max_length=1, choices=Card_CHOICES, default='N')
     lastname = models.CharField(verbose_name='Фамилия', max_length=32)
     firstname = models.CharField(verbose_name='Имя', max_length=32)
     middlename = models.CharField(verbose_name='Отчество', max_length=32, blank=True)
