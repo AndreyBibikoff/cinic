@@ -45,7 +45,20 @@
                     {% endfor %}
                     </tbody>
                   </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      </a>
+              {% for page in all_patients.paginator.page_range %}
 
+    </li>
+    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
+      </a>
+    </li>
+
+  </ul>
+</nav>
                 </div>
 
               </div>

@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 from patient.forms import AddPatientForm, PatientCommentForm
 from patient.models import Patient
@@ -76,7 +77,7 @@ def opd(request, pk):
 
 def patients(request):
     title = 'Гастроцентр "Здоровье" - Пациенты'
-    all_patients = Patient.objects.all()
+    all_patients = Patient.objects.all().order_by('-lastname')
     search_query = request.GET.get('query')
     if not search_query:
         search_query = ''
@@ -84,9 +85,14 @@ def patients(request):
     if search_query != '':
         all_patients = Patient.objects.filter(lastname__contains=search_query)
 
+    paginator = Paginator(all_patients, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'title': title,
-        'all_patients': all_patients,
+        'all_patients': page_obj,
+
 
     }
 
