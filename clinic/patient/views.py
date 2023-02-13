@@ -77,7 +77,7 @@ def opd(request, pk):
 
 def patients(request):
     title = 'Гастроцентр "Здоровье" - Пациенты'
-    all_patients = Patient.objects.all().order_by('-lastname')
+    all_patients = Patient.objects.all().order_by('-id')
     search_query = request.GET.get('query')
     if not search_query:
         search_query = ''
