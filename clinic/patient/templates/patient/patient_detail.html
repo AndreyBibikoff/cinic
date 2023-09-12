@@ -23,9 +23,12 @@
                 <div class="card-body">
 
                                         <a href="{% url 'patient:opd' patient.pk%}" class="btn btn-success" role="button">Согласие на ОПД</a>
-                                      <a href="{% url 'patient:dogovor2str' patient.pk%}" class="btn btn-success" role="button">Договор</a>
+                                        <a href="{% url 'patient:dogovor5str' patient.pk%}" class="btn btn-success" role="button">Договор</a>
                                         <a href="{% url 'patient:ids_opd' patient.pk%}" class="btn btn-success" role="button">ИДС+ОПД</a>
                                         <a href="{% url 'patient:el_boln' patient.pk%}" class="btn btn-success" role="button">Согласие на эл. больничный</a>
+                                        <a href="{% url 'patient:med_card' patient.pk%}" class="btn btn-success" role="button">Карта</a>
+                                        <a href="{% url 'patient:dogovor2str' patient.pk%}" class="btn btn-danger" role="button">Договор 2 стр. старый</a>
+
 
                   <h5 class="card-title bi bi-person"> {{ patient.lastname }} {{ patient.firstname }} {{ patient.middlename }} <span></span></h5>
                                   <p class="text-muted">Создан: {{patient.created|date:"d-m-Y H:i:s "}} / Обновлен: {{ patient.updated|date:"d-m-Y H:i:s" }}</p>

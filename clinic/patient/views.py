@@ -7,12 +7,45 @@ from patient.forms import AddPatientForm, PatientCommentForm
 from patient.models import Patient
 from datetime import datetime
 
+months = {1: 'Января', 2: 'Февраля', 3: 'Марта', 4: 'Апреля', 5: 'Мая', 6: 'Июня', 7: 'Июля', 8: 'Августа',
+          9: 'Сентября', 10: 'Октября', 11: 'Ноября', 12: 'Декабря'}
+
+
+def dogovor5str(request, pk):
+    title = 'Гастроцентр "Здоровье" - Договор'
+    patient = get_object_or_404(Patient, pk=pk)
+    dt = datetime.now()
+    date = dt.strftime('%d.%m.%Y')
+    passp_d_of_i = patient.date_of_issue
+    passp_d_o_f_to_template = passp_d_of_i.strftime('%d.%m.%Y')
+
+    if patient.sex == 'M':
+        appeal = 'гражданин'
+    elif patient.sex == 'W':
+        appeal = 'гражданка'
+    else:
+        appeal = 'гражданин(ка)'
+
+    if patient.passp_series:
+        passport = 'паспорт'
+    else:
+        passport = ''
+
+    context = {
+        'title': title,
+        'patient': patient,
+        'date': date,
+        'appeal': appeal,
+        'passport': passport,
+        'd_o_f': passp_d_o_f_to_template,
+    }
+
+    return render(request, 'patient/dogovor5str.html', context)
+
 
 def dogovor2str(request, pk):
-    title = 'Гастроцентр "Здоровье" - Согласие на обработку персоональных данных'
+    title = 'Гастроцентр "Здоровье" - Договор'
     patient = get_object_or_404(Patient, pk=pk)
-    months = {1: 'Января', 2: 'Февраля', 3: 'Марта', 4: 'Апреля', 5: 'Мая', 6: 'Июня', 7: 'Июля', 8: 'Августа',
-              9: 'Сентября', 10: 'Октября', 11: 'Ноября', 12: 'Декабря'}
     dt = datetime.now()
     day = dt.day
     year = dt.year
@@ -62,6 +95,35 @@ def el_boln(request, pk):
     return render(request, 'patient/soglasie_na_boln.html', context)
 
 
+def med_card(request, pk):
+    title = 'Гастроцентр "Здоровье" - Медицинская карта'
+    patient = get_object_or_404(Patient, pk=pk)
+    dt = datetime.now()
+    date = dt.strftime('%d.%m.%Y')
+    birthday = patient.bdate.strftime('%d.%m.%Y')
+    if patient.sex == 'M':
+        sex = 'М'
+    elif patient.sex == 'W':
+        sex = 'Ж'
+    else:
+        sex = ''
+    if patient.snils:
+        snils = patient.snils
+    else:
+        snils = ''
+
+    context = {
+        'title': title,
+        'patient': patient,
+        'date': date,
+        'sex': sex,
+        'bdate': birthday,
+        'snils': snils,
+    }
+
+    return render(request, 'patient/med_card.html', context)
+
+
 def opd(request, pk):
     title = 'Гастроцентр "Здоровье" - Согласие на обработку персоональных данных'
     patient = get_object_or_404(Patient, pk=pk)
@@ -85,14 +147,13 @@ def patients(request):
     if search_query != '':
         all_patients = Patient.objects.filter(lastname__contains=search_query)
 
-    paginator = Paginator(all_patients, 2)
+    paginator = Paginator(all_patients, 30)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
         'title': title,
         'all_patients': page_obj,
-
 
     }
 

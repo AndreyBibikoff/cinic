@@ -8,7 +8,14 @@ class Patient(models.Model):
         (Yes, 'Заведена'),
         (No, 'Не заведена'),
     )
+    Man = 'M'
+    Woman = 'W'
+    SEX_CHOICES = (
+        (Man, 'Мужской'),
+        (Woman, 'Женский'),
+    )
     medical_card = models.CharField(verbose_name='Медицинская карта', max_length=1, choices=Card_CHOICES, default='N')
+    sex = models.CharField(verbose_name='Пол', max_length=1, choices=SEX_CHOICES, blank=True)
     lastname = models.CharField(verbose_name='Фамилия', max_length=32)
     firstname = models.CharField(verbose_name='Имя', max_length=32)
     middlename = models.CharField(verbose_name='Отчество', max_length=32, blank=True)
