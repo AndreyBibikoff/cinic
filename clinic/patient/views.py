@@ -112,6 +112,11 @@ def med_card(request, pk):
     else:
         snils = ''
 
+    if patient.email == None:
+        email = ''
+    else:
+        email = patient.email
+
     context = {
         'title': title,
         'patient': patient,
@@ -119,6 +124,7 @@ def med_card(request, pk):
         'sex': sex,
         'bdate': birthday,
         'snils': snils,
+        'email': email,
     }
 
     return render(request, 'patient/med_card.html', context)
