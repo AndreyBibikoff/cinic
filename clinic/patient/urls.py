@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from patient.views import patients, add_patient, patient_detail, opd, dogovor2str, ids_opd, el_boln, med_card, \
-    dogovor5str
+    dogovor5str, ids
 
 app_name = 'patient'
 
@@ -31,6 +31,7 @@ urlpatterns = [
     path('dogovor5str/<int:pk>/', dogovor5str, name='dogovor5str'),
     path('old_dogovor2str/<int:pk>/', dogovor2str, name='dogovor2str'),
     path('ids_opd/<int:pk>/', ids_opd, name='ids_opd'),
+    path('ids/<int:pk>/', ids, name='ids'),
     path('soglasie_na_boln/<int:pk>/', el_boln, name='el_boln'),
     path('med_card/<int:pk>/', med_card, name='med_card'),
 

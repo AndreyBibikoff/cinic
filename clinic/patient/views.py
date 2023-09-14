@@ -64,6 +64,28 @@ def dogovor2str(request, pk):
     return render(request, 'patient/dogovor2str.html', context)
 
 
+def ids(request, pk):
+    title = 'Гастроцентр "Здоровье" - ИДС'
+    patient = get_object_or_404(Patient, pk=pk)
+    dt = datetime.now()
+    day = dt.day
+    year = dt.year
+    month = patient.bdate.month
+    get_month = months[month]
+
+    context = {
+        'title': title,
+        'patient': patient,
+        'day': day,
+        'year': year,
+        'get_month': get_month,
+        'date': dt.strftime('%d.%m.%Y'),
+
+    }
+
+    return render(request, 'patient/ids.html', context)
+
+
 def ids_opd(request, pk):
     title = 'Гастроцентр "Здоровье" - ИДС+ОПД'
     patient = get_object_or_404(Patient, pk=pk)
