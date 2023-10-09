@@ -21,6 +21,7 @@ class Patient(models.Model):
     middlename = models.CharField(verbose_name='Отчество', max_length=32, blank=True)
     bdate = models.DateField(verbose_name='День рождения', blank=True, null=True, default='0001-01-01')
     address = models.CharField(verbose_name='Адрес', max_length=64, blank=True, null=True)
+    work = models.CharField(verbose_name='Место работы', max_length=64, blank=True, null=True)
     snils = models.CharField(verbose_name='СНИЛС', max_length=14, blank=True, null=True)
     mobile_phone = models.BigIntegerField(verbose_name='мобильный телефон', blank=True, null=True)
     email = models.EmailField(verbose_name='email', blank=True, null=True)
